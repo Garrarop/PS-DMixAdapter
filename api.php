@@ -8,16 +8,14 @@ $module_name = 'dmixadapter';
 $token = pSQL(Tools::encrypt($module_name.'/ajax.php'));
 $token_url = pSQL(Tools::getValue('token'));
 
-if ($token != $token_url || !Module::isInstalled($module_name)) {
+
+if ($token != $token_url || !Module::isInstalled($module_name) || null == pSQL(Tools::getValue('table'))) {
     die('Error al ejecutar el ajax');
 }
 
 $module = Module::getInstanceByName($module_name);
-if ($module->active) {
-	$search = pSQL(Tools::getValue('search'));
-	$search = str_replace('"','', $search);
-	$search = str_replace("'",'', $search);
-    if ($search != '') {
-        echo json_encode($module->searchProducts($search));
-    }
+if ($module->active && $_SERVER['REQUEST_METHOD'] === 'GET') {
+	$table = pSQL(Tools::getValue('table'));
+	$id = pSQL(Tools::getValue('id'));
+    echo json_encode($module->search($table, $id));
 }

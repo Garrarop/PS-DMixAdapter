@@ -27,13 +27,17 @@ class DMixAdapter extends Module
         return true;
     }
     
-    public function searchProducts($search)
+    public function search($table, $id)
     {
-        $search = str_replace(' ', '%', $search);
-		$search = str_replace('*', '%', $search);
+		$table = str_replace('"','', $table);
+		$table = str_replace("'",'', $table);
+		$table = str_replace('*', '%', $table);
+		$id = str_replace('"','', $id);
+		$id = str_replace("'",'', $id);
+		
         return Db::getInstance()->executeS('SELECT *
             FROM '._DB_PREFIX_.'product_lang
             WHERE id_lang = '.(int)$this->context->language->id.'
-            AND `name` LIKE "%'.$search.'%"');
+            AND `name` LIKE "%'.$table.'%"');
     }
 }
