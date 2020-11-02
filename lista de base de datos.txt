@@ -1,0 +1,15 @@
+- productos (solo activos)
+	id, nombre, descripción corta, descripcion, precio, url de imagen por defecto, combination_id_default, category_default
+	extras: combinations, url de images, categories
+- combinations
+	id, product_id, precio, url de imagen por defecto
+- categorias
+	id, nombre, parent_category_id, url imagen, descripcion
+	extras: parent_categories, products
+- carritos
+	id, customer_id, (boolean) activo
+	extras: products, id codigos de promocion aplicados
+- customers
+	id, nombre, email
+- códigos de promoción
+	id, código, cantidad del descuento, tipo (porcentaje o monto)
