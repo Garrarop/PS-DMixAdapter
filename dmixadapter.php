@@ -35,9 +35,15 @@ class DMixAdapter extends Module
 		$id = str_replace('"','', $id);
 		$id = str_replace("'",'', $id);
 		
-        return Db::getInstance()->executeS('SELECT *
+		$busqueda = 'SELECT *
             FROM '._DB_PREFIX_.'product_lang
             WHERE id_lang = '.(int)$this->context->language->id.'
-            AND `name` LIKE "%'.$table.'%"');
+            AND `name` LIKE "%'.$table.'%"';
+
+		if ($id != null) {
+			$busqueda .= ' AND `id_product` = '.$id;
+		}
+		
+        return Db::getInstance()->executeS($busqueda);
     }
 }
