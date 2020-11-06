@@ -1,10 +1,10 @@
-- productos (solo activos)
-	id, nombre, descripción corta, descripcion, precio, url de imagen por defecto, combination_id_default, category_default
-	extras: combinations, url de images, categories
+- products (solo activos)
+	id, nombre, descripción corta, descripcion, precio, default_image_id, default_combination_id, default_category_id
+	extras: combinations, images, categories
 - combinations
-	id, product_id, precio, url de imagen por defecto
-- categorias
-	id, nombre, parent_category_id, url imagen, descripcion
+	id, product_id, precio, default_image_id
+- categories
+	id, nombre, parent_category_id, descripcion
 	extras: parent_categories, products
 - carritos
 	id, customer_id, (boolean) activo
