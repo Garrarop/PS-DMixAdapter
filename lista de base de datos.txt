@@ -11,5 +11,5 @@
 	extras: products, discounts
 - customers
 	id, name, email
-- códigos de promoción
+- discounts
 	id, code, value, type (percentage | fixed)
