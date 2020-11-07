@@ -110,18 +110,30 @@ class DMixAdapter extends Module
         return JSON_encode(Db::getInstance()->executeS($busqueda));
     }
 	
-	public function imgUrl(){
+	public function imgUrl($id){
 		
-		$busqueda = 'SELECT "._DB_PREFIX_."product.id_product, "._DB_PREFIX_."image.id_image 
-					 FROM "._DB_PREFIX_."product, "._DB_PREFIX_."image
-					 WHERE "._DB_PREFIX_."image.id_product = "._DB_PREFIX_."product.id_product and "._DB_PREFIX_."product.id_product = 11';
+		$busqueda = 'select distinct p.id_product, i.id_image,color as codigo,  psatrl.name as color
+					 from ps_product p
+					 inner join ps_image i on p.id_product = i.id_product
+					 inner join ps_product_attribute atr on atr.id_product = p.id_product
+					 inner join ps_product_attribute_image atrimg on atrimg.id_product_attribute = atr.id_product_attribute and atrimg.id_image = i.id_image
+					 inner join ps_product_attribute_combination com on com.id_product_attribute = atr.id_product_attribute
+					 inner join ps_attribute psatr on psatr.id_attribute = com.id_attribute
+					 inner join ps_attribute_lang psatrl on psatr.id_attribute = psatrl.id_attribute 
+					 inner join ps_attribute_group ag on psatr.id_attribute_group = ag.id_attribute_group
+					 where ag.is_color_group = 1 and psatrl.id_lang =1';
+		if ($id != null) {
+			$busqueda .= " AND p.id_product = ".$id;
+		}
+		$busqueda .= " order by p.id_product";
 		
 		$rows = Db::getInstance()->executeS($busqueda);
 		
-		$resultado = "";
+		$resultado = [];
 		foreach($rows as $row) {
 			$url = 'http://localhost/Presta/img/p/'.implode('/', str_split((string) $row["id_image"])).'/'.$row["id_image"].'.jpg';
-			$resultado.= $url."<br>";
+			$boton = "<a href='".$url."' target='_blank'>".$row["color"]."_".$row["id_product"]."</a> <br> <image width='150px' src='".$url."'>";
+			array_push($resultado,$boton);
 		}
 
 		return $resultado;

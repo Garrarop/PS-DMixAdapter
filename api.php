@@ -24,9 +24,9 @@ if ($module->active){
 	} else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$table = pSQL(Tools::getValue('table'));
 		$id = pSQL(Tools::getValue('id'));
-		
+		echo ("<pre>");
 		print_r ($module->search($table, $id));
-		
+		echo ("</pre>");
 	}
 }
 

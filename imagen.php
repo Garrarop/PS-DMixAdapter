@@ -21,7 +21,7 @@ if ($module->active){
 		$table = pSQL(Tools::getValue('table'));
 		$id = pSQL(Tools::getValue('id'));
 		echo ("<pre>");
-		print_r ($module->imgUrl());
+		print_r ($module->imgUrl($id));
 		echo ("</pre>");
 	}
 }
