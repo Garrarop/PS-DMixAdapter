@@ -4,12 +4,12 @@
 - combinations
 	id, product_id, precio, default_image_id
 - categories
-	id, nombre, parent_category_id, descripcion
+	id, nombre, parent_category_id, description
 	extras: parent_categories, products
-- carritos
-	id, customer_id, (boolean) activo
-	extras: products, id codigos de promocion aplicados
+- carts
+	id, customer_id, order
+	extras: products, discounts
 - customers
-	id, nombre, email
+	id, name, email
 - códigos de promoción
-	id, código, cantidad del descuento, tipo (porcentaje o monto)
+	id, code, value, type (percentage | fixed)
