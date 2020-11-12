@@ -38,6 +38,6 @@ class DmixapiImagesModuleFrontController extends ModuleFrontController
         //   print_r (Db::getInstance()->getRow($sql));
         // } else {
         // }
-        print_r (Db::getInstance()->executeS($sql));
+        echo (json_encode(Db::getInstance()->executeS($sql)));
     }
 }

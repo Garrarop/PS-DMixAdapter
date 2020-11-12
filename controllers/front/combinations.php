@@ -35,9 +35,9 @@ class DmixapiCombinationsModuleFrontController extends ModuleFrontController
 
         $sql = $query->toString();
         if ($id != null){
-          print_r (Db::getInstance()->getRow($sql));
+          echo (json_encode(Db::getInstance()->getRow($sql)));
         } else {
-          print_r (Db::getInstance()->executeS($sql));
+          echo (json_encode(Db::getInstance()->executeS($sql)));
         }
     }
 }

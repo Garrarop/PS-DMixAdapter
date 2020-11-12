@@ -50,7 +50,7 @@ return [
 			'with' => [
 				'products' => [
 					'selectClause' => 'GROUP_CONCAT(cp.id_product) AS id_products',
-					'fromClause' => 'INNER JOIN ps_category_product cp ON cp.id_category = c.id_category',
+					'fromClause' => 'LEFT JOIN ps_category_product cp ON cp.id_category = c.id_category',
           'whereClause' => '',
           'groupClause' => '',
           'orderClause' => ''
@@ -61,7 +61,14 @@ return [
           'whereClause' => '',
           'groupClause' => '',
           'orderClause' => ''
-				]
+				],
+        'childs' => [
+          'selectClause' => ' GROUP_CONCAT(distinct ch.id_category) AS id_child',
+          'fromClause' => 'left join ps_category ch on ch.id_parent = c.id_category',
+          'whereClause' => '',
+          'groupClause' => '',
+          'orderClause' => ''
+        ]
 			]
 		],
 		'customers' => [
